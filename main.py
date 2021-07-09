@@ -74,21 +74,10 @@ def run():
                     # output_image = np.where(condition, bg_image, seg_image)
                     #
                     # cv2.imshow('MediaPipe FaceMesh', face_and_hand_image)
-                    # msgFromClient = "Hello UDP Server"
-                    # bytesToSend = str.encode(msgFromClient)
-                    # serverAddressPort = ("192.168.56.1", 515)
-                    #
-                    # bufferSize = 1024
-                    # UDPClientSocket = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM)
-                    #
-                    # # Send to server using created UDP socket
-                    #
-                    # UDPClientSocket.sendto(bytesToSend, serverAddressPort)
-                    #
-                    # # msgFromServer = UDPClientSocket.recvfrom(bufferSize)
-                    # #
-                    # # msg = "Message from Server {}".format(msgFromServer[0])
-                    sock_sender.send_numpy_array(face_and_hand_image)
+                    try:
+                        sock_sender.send_numpy_array(face_and_hand_image)
+                    except:
+                        pass
                     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
                     cv2.imshow('frame', gray)
                     if cv2.waitKey(5) & 0xFF == 27:
